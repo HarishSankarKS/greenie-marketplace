@@ -263,3 +263,8 @@ export function getInventorySummary(): Record<Category, number> {
     {} as Record<Category, number>
   );
 }
+
+export function getAllMaterialIds(): string[] {
+  return materials.map((m) => m.id);
+}
+

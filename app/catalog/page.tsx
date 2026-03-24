@@ -158,23 +158,39 @@ function CatalogInner() {
             <p className="text-overline" style={{ color: "var(--color-accent-amber)", marginBottom: 4 }}>All Stations · Live Stock</p>
             <h1 style={{ fontSize: 26, fontWeight: 800, color: "#fff" }}>Browse Materials</h1>
           </div>
-          {/* Search in banner */}
-          <div style={{ flex: 1, maxWidth: 420 }}>
-            <div className="search-bar">
-              <Search style={{ width: 15, height: 15, color: "var(--color-neutral-500)", margin: "0 0 0 12px" }} />
-              <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by name, grade…" />
-              {search && <button onClick={() => setSearch("")} style={{ padding: "8px", background: "none", border: "none", cursor: "pointer", color: "var(--color-neutral-500)", display: "flex" }}><X style={{ width: 13, height: 13 }} /></button>}
+          {/* Single search bar — hero version */}
+          <div style={{ flex: 1, maxWidth: 440 }}>
+            <div style={{
+              display: "flex", alignItems: "center",
+              background: "rgba(255,255,255,0.12)",
+              border: "1.5px solid rgba(255,255,255,0.25)",
+              borderRadius: "var(--radius-md)", overflow: "hidden",
+              backdropFilter: "blur(4px)",
+            }}>
+              <Search style={{ width: 15, height: 15, color: "rgba(255,255,255,0.6)", margin: "0 0 0 12px", flexShrink: 0 }} />
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search concrete, steel, HDPE grade..."
+                style={{
+                  flex: 1, background: "transparent", border: "none", outline: "none",
+                  fontSize: 13, padding: "10px 12px", color: "#fff",
+                }}
+              />
+              {search && (
+                <button onClick={() => setSearch("")} style={{ padding: "8px", background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.6)", display: "flex" }}>
+                  <X style={{ width: 13, height: 13 }} />
+                </button>
+              )}
+              <button style={{
+                padding: "8px 18px", background: "var(--color-accent-amber)", border: "none",
+                fontSize: 13, fontWeight: 700, cursor: "pointer", color: "var(--color-neutral-900)",
+                whiteSpace: "nowrap",
+              }}>
+                Search
+              </button>
             </div>
           </div>
-          {/* Mobile filter pill */}
-          <button onClick={() => setSidebarOpen(true)} style={{
-            display: "flex", alignItems: "center", gap: 6, padding: "10px 16px",
-            background: "var(--color-accent-amber)", border: "none", borderRadius: "var(--radius-md)",
-            fontSize: 13, fontWeight: 700, cursor: "pointer", color: "var(--color-neutral-900)"
-          }}>
-            <SlidersHorizontal style={{ width: 15, height: 15 }} />
-            Filters {activeFilters > 0 && `(${activeFilters})`}
-          </button>
         </div>
       </div>
 

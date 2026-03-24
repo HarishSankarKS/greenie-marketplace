@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Package, Clock, IndianRupee, ShoppingCart, ArrowRight, TrendingUp, Truck, Star } from "lucide-react";
+import { ShoppingCart, Package, IndianRupee, Star, ArrowRight, Truck } from "lucide-react";
 import { orders } from "@/lib/mock/orders";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
@@ -21,10 +21,10 @@ export default function BuyerDashboard() {
   const totalSpent = orders.filter((o) => ["delivered", "reviewed"].includes(o.status)).reduce((s, o) => s + o.total, 0);
 
   const stats = [
-    { icon: "🛒", label: "Active Orders",  value: String(activeOrders.length), sub: "in progress" },
-    { icon: "📦", label: "Total Orders",   value: String(orders.length), sub: "all time" },
-    { icon: "💰", label: "Total Spent",    value: formatCurrency(totalSpent), sub: "incl. GST" },
-    { icon: "⭐", label: "Avg Rating",     value: "4.6 / 5", sub: "given by you" },
+    { Icon: ShoppingCart, label: "Active Orders",  value: String(activeOrders.length), sub: "in progress",  iconBg: "#EFF6FF", iconColor: "#1D4ED8" },
+    { Icon: Package,      label: "Total Orders",   value: String(orders.length),        sub: "all time",     iconBg: "#FEF3C7", iconColor: "#B45309" },
+    { Icon: IndianRupee,  label: "Total Spent",    value: formatCurrency(totalSpent),   sub: "incl. GST",    iconBg: "#DCFCE7", iconColor: "#15803D" },
+    { Icon: Star,         label: "Avg Rating",     value: "4.6 / 5",                    sub: "given by you", iconBg: "#FEF9C3", iconColor: "#CA8A04" },
   ];
 
   return (
@@ -53,18 +53,24 @@ export default function BuyerDashboard() {
           display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16,
           marginTop: -32, marginBottom: 32,
         }}>
-          {stats.map((s) => (
-            <div key={s.label} style={{
+          {stats.map(({ Icon, label, value, sub, iconBg, iconColor }) => (
+            <div key={label} style={{
               background: "var(--color-white)",
               border: "1.5px solid var(--color-neutral-200)",
               borderRadius: "var(--radius-lg)",
               padding: "20px 24px",
               boxShadow: "var(--shadow-card)"
             }}>
-              <div style={{ fontSize: 24, marginBottom: 10 }}>{s.icon}</div>
-              <p style={{ fontSize: 22, fontWeight: 800, color: "var(--color-neutral-900)", lineHeight: 1 }}>{s.value}</p>
-              <p style={{ fontSize: 12, color: "var(--color-neutral-500)", marginTop: 4 }}>{s.label}</p>
-              <p style={{ fontSize: 11, color: "var(--color-neutral-200)", marginTop: 2 }}>{s.sub}</p>
+              <div style={{
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                width: 36, height: 36, borderRadius: "var(--radius-md)",
+                background: iconBg, marginBottom: 12,
+              }}>
+                <Icon style={{ width: 18, height: 18, color: iconColor }} strokeWidth={2} />
+              </div>
+              <p style={{ fontSize: 22, fontWeight: 800, color: "var(--color-neutral-900)", lineHeight: 1 }}>{value}</p>
+              <p style={{ fontSize: 12, color: "var(--color-neutral-700)", marginTop: 5, fontWeight: 500 }}>{label}</p>
+              <p style={{ fontSize: 11, color: "var(--color-neutral-500)", marginTop: 2 }}>{sub}</p>
             </div>
           ))}
         </div>
@@ -139,24 +145,37 @@ export default function BuyerDashboard() {
           {/* Sidebar */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {/* Quick Actions */}
-            <div className="card" style={{ padding: 20 }}>
-              <h2 style={{ fontSize: 14, fontWeight: 700, color: "var(--color-neutral-900)", marginBottom: 12 }}>Quick Actions</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{
+              background: "var(--color-white)",
+              border: "1.5px solid var(--color-neutral-200)",
+              borderRadius: "var(--radius-lg)",
+              padding: "20px",
+              boxShadow: "var(--shadow-card)"
+            }}>
+              <h2 style={{ fontSize: 14, fontWeight: 700, color: "var(--color-neutral-900)", marginBottom: 14, paddingBottom: 12, borderBottom: "1px solid var(--color-neutral-200)" }}>Quick Actions</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 {[
-                  { href: "/catalog",         icon: "🛒", label: "Browse Materials" },
-                  { href: "/portal/orders",   icon: "📋", label: "My Orders" },
-                  { href: "/portal/tracker",  icon: "🚛", label: "Live Tracker" },
-                  { href: "/portal/payments", icon: "💳", label: "Payment History" },
-                ].map(({ href, icon, label }) => (
+                  { href: "/catalog",         icon: ShoppingCart, label: "Browse Materials",  color: "#1D4ED8" },
+                  { href: "/portal/orders",   icon: Package,       label: "My Orders",         color: "#B45309" },
+                  { href: "/portal/tracker",  icon: Truck,         label: "Live Tracker",       color: "#7C3AED" },
+                  { href: "/portal/payments", icon: IndianRupee,   label: "Payment History",    color: "#15803D" },
+                ].map(({ href, icon: Icon, label, color }) => (
                   <Link key={href} href={href} style={{
-                    display: "flex", alignItems: "center", gap: 10,
-                    padding: "10px 12px", borderRadius: "var(--radius-md)",
+                    display: "flex", alignItems: "center", gap: 12,
+                    padding: "10px 10px", borderRadius: "var(--radius-md)",
                     fontSize: 13, fontWeight: 500, color: "var(--color-neutral-700)",
-                    textDecoration: "none", transition: "all 0.15s"
+                    textDecoration: "none",
                   }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "var(--color-primary-50)"; el.style.color = "var(--color-primary-700)"; }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = "var(--color-neutral-100)"; el.style.color = "var(--color-neutral-900)"; }}
                     onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = "transparent"; el.style.color = "var(--color-neutral-700)"; }}>
-                    <span style={{ fontSize: 18 }}>{icon}</span> {label}
+                    <span style={{
+                      display: "inline-flex", alignItems: "center", justifyContent: "center",
+                      width: 30, height: 30, borderRadius: "var(--radius-sm)",
+                      background: "var(--color-neutral-100)", flexShrink: 0,
+                    }}>
+                      <Icon style={{ width: 14, height: 14, color }} strokeWidth={2} />
+                    </span>
+                    {label}
                   </Link>
                 ))}
               </div>
@@ -167,14 +186,22 @@ export default function BuyerDashboard() {
               <div key={o.id} style={{
                 background: "var(--color-primary-50)",
                 border: "1.5px solid var(--color-primary-500)",
-                borderRadius: "var(--radius-lg)", padding: 20
+                borderRadius: "var(--radius-lg)", padding: "20px"
               }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: "var(--color-primary-700)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 6 }}>
-                  🔄 One-Click Reorder
+                <p style={{ fontSize: 10, fontWeight: 800, color: "var(--color-primary-700)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 8 }}>
+                  🔄 ONE-CLICK REORDER
                 </p>
-                <p style={{ fontSize: 13, fontWeight: 600, color: "var(--color-neutral-900)", marginBottom: 4 }}>{o.items[0].materialName}</p>
-                <p style={{ fontSize: 11, color: "var(--color-neutral-500)", marginBottom: 16 }}>{o.items[0].grade}</p>
-                <Link href="/catalog" className="btn-secondary" style={{ display: "block", textAlign: "center", justifyContent: "center" }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: "var(--color-neutral-900)", marginBottom: 3 }}>{o.items[0].materialName}</p>
+                <p style={{ fontSize: 12, color: "var(--color-neutral-500)", marginBottom: 18 }}>{o.items[0].grade}</p>
+                <Link href="/catalog" style={{
+                  display: "block", textAlign: "center",
+                  padding: "11px 24px",
+                  background: "var(--color-primary-900)",
+                  color: "#fff",
+                  borderRadius: "var(--radius-md)",
+                  fontSize: 13, fontWeight: 700,
+                  textDecoration: "none",
+                }}>
                   Reorder Now
                 </Link>
               </div>

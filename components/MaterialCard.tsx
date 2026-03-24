@@ -48,20 +48,31 @@ export default function MaterialCard({ material }: { material: Material }) {
         <div style={{
           position: "relative",
           paddingBottom: "75%", // 4:3
-          background: "linear-gradient(135deg, #f0f7f0 0%, #e8f5e9 100%)",
+          background: "linear-gradient(135deg, #e8f0e9 0%, #d6e8d8 100%)",
           overflow: "hidden"
         }}>
-          {/* Category emoji as placeholder */}
-          <div style={{
-            position: "absolute", inset: 0,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 64, opacity: 0.15, transition: "opacity 0.2s"
-          }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "0.25")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "0.15")}
-          >
-            {categoryEmoji[material.category] || "📦"}
-          </div>
+          {/* Real material photo */}
+          {({"Concrete": "/materials/concrete.jpg", "Steel": "/materials/steel.jpg", "Wood": "/materials/wood.webp", "Plastic": "/materials/plastic.jpg"} as Record<string,string>)[material.category] ? (
+            <img
+              src={({"Concrete": "/greenie-marketplace/materials/concrete.jpg", "Steel": "/greenie-marketplace/materials/steel.jpg", "Wood": "/greenie-marketplace/materials/wood.webp", "Plastic": "/greenie-marketplace/materials/plastic.jpg"} as Record<string,string>)[material.category]}
+              alt={material.category}
+              style={{
+                position: "absolute", inset: 0,
+                width: "100%", height: "100%",
+                objectFit: "cover",
+                transition: "transform 0.35s ease",
+                transform: hovering ? "scale(1.06)" : "scale(1)",
+              }}
+            />
+          ) : (
+            <div style={{
+              position: "absolute", inset: 0,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 56, opacity: 0.2,
+            }}>
+              {categoryEmoji[material.category] || "📦"}
+            </div>
+          )}
 
           {/* Badges — top row */}
           <div style={{ position: "absolute", top: 10, left: 10, right: 10, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>

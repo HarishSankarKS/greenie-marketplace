@@ -200,7 +200,7 @@ export const materials: Material[] = [
     availableQty: 190,
     minOrder: 5,
     description:
-      "Premium road-grade crushed concrete sourced from EAST Transfer Station. Lab tested for compressive strength. Pre-approved by CCMC for road sub-base use.",
+      "Premium road-grade crushed concrete sourced from EAST Transfer Station. Independently verified for compressive strength. Pre-approved by CCMC for road sub-base use.",
     images: ["/images/concrete-road-1.jpg"],
     labCertAvailable: true,
     tags: ["road-base", "CCMC-approved", "premium"],

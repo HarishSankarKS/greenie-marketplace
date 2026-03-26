@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  MapPin, ShoppingCart, FlaskConical, ChevronLeft, Star,
+  MapPin, ShoppingCart, ShieldCheck, ChevronLeft, Star,
   Package, Bell, AlertCircle, Check
 } from "lucide-react";
 import { getMaterialById, categoryIcons } from "@/lib/mock/materials";
@@ -73,8 +73,8 @@ export default function MaterialDetailClient({ id }: { id: string }) {
               <div className="text-9xl opacity-10">{categoryIcons[material.category]}</div>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-100/50 to-transparent" />
               {material.labCertAvailable && (
-                <div className="absolute top-4 left-4 flex items-center gap-1.5 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-full">
-                  <FlaskConical className="w-3.5 h-3.5" /> Lab Certificate Available
+                <div className="absolute top-4 left-4 flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 px-3 py-1.5 rounded-full">
+                  <ShieldCheck className="w-3.5 h-3.5" /> QA Verified
                 </div>
               )}
               {isOutOfStock && (
@@ -102,8 +102,8 @@ export default function MaterialDetailClient({ id }: { id: string }) {
                 ))}
               </div>
               {material.labCertAvailable && (
-                <button className="mt-4 flex items-center gap-2 text-sm text-blue-700 bg-blue-50 border border-blue-200 px-4 py-2.5 rounded-xl hover:bg-blue-100 transition-colors w-full justify-center font-medium">
-                  <FlaskConical className="w-4 h-4" /> Download Lab Certificate (PDF)
+                <button className="mt-4 flex items-center gap-2 text-sm text-green-700 bg-green-50 border border-green-200 px-4 py-2.5 rounded-xl hover:bg-green-100 transition-colors w-full justify-center font-medium">
+                  <ShieldCheck className="w-4 h-4" /> Download QA Report (PDF)
                 </button>
               )}
             </div>

@@ -122,13 +122,13 @@ function CatalogInner() {
         })}
       </SidebarSection>
 
-      {/* Lab Certified */}
+      {/* QA Verified */}
       <SidebarSection title="Certifications">
         <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
           <input type="checkbox" checked={certOnly} onChange={() => setCertOnly(!certOnly)}
             style={{ width: 14, height: 14, accentColor: "var(--color-primary-700)" }} />
           <span style={{ fontSize: 13, color: "var(--color-neutral-700)", fontWeight: certOnly ? 600 : 400 }}>
-            🧪 Lab Certified only
+            🛡️ QA Verified only
           </span>
         </label>
       </SidebarSection>
@@ -262,7 +262,7 @@ function CatalogInner() {
                 ))}
                 {certOnly && (
                   <button onClick={() => setCertOnly(false)} className="chip-green" style={{ cursor: "pointer", border: "none", gap: 5 }}>
-                    Lab Certified <X style={{ width: 10, height: 10 }} />
+                    QA Verified <X style={{ width: 10, height: 10 }} />
                   </button>
                 )}
               </div>

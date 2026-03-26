@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, FlaskConical, Cpu, Clock } from "lucide-react";
+import { ArrowRight, ShieldCheck, Cpu, Clock } from "lucide-react";
 import { materials, categories, categoryIcons, getInventorySummary, Category } from "@/lib/mock/materials";
 import MaterialCard from "@/components/MaterialCard";
 
@@ -20,7 +20,7 @@ export default function HomePage() {
     { icon: "⚡", label: "WTN Generated" },
     { icon: "🤖", label: "Edge AI Sorted" },
     { icon: "✅", label: "GREENIE Verified" },
-    { icon: "🧪", label: "Lab Certified (opt.)" },
+    { icon: "🛡️", label: "Quality Assured" },
   ];
 
   return (
@@ -231,7 +231,7 @@ export default function HomePage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 40 }}>
             {[
               { icon: <Cpu style={{ width: 28, height: 28 }} />, title: "AI Grade Verified", desc: "Every batch graded by GREENIE's Edge AI at the Transfer Station conveyor — what you see matches what you receive." },
-              { icon: <FlaskConical style={{ width: 28, height: 28 }} />, title: "Lab Certified Options", desc: "Select materials include CPWD-format lab certificates downloadable directly from the product page." },
+              { icon: <ShieldCheck style={{ width: 28, height: 28 }} />, title: "Quality Assured", desc: "Select materials include CPWD-format quality assurance reports — downloadable directly from the product page for engineer approval." },
               { icon: <Clock style={{ width: 28, height: 28 }} />, title: "Live Stock Sync", desc: "Inventory updates in <30 seconds from Transfer Station to your screen. No stale listings." },
             ].map((f) => (
               <div key={f.title} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MapPin, ShoppingCart, Heart, Star, FlaskConical, Zap } from "lucide-react";
+import { MapPin, ShoppingCart, Heart, Star, ShieldCheck, Zap } from "lucide-react";
 import { Material } from "@/lib/mock/materials";
 import { formatCurrency } from "@/lib/utils";
 import { useCart } from "@/components/CartProvider";
@@ -102,16 +102,16 @@ export default function MaterialCard({ material }: { material: Material }) {
             <span className="chip-amber">{material.grade.split("/")[0].trim()}</span>
           </div>
 
-          {/* Lab cert badge */}
+          {/* QA Verified badge */}
           {material.labCertAvailable && (
             <div style={{ position: "absolute", bottom: 10, right: 10 }}>
               <span style={{
-                background: "#EFF6FF", color: "#1D4ED8",
-                border: "1px solid #BFDBFE",
+                background: "#F0FDF4", color: "#15803D",
+                border: "1px solid #BBF7D0",
                 fontSize: 9, fontWeight: 700, padding: "3px 7px",
                 borderRadius: "var(--radius-full)", display: "flex", alignItems: "center", gap: 3
               }}>
-                <FlaskConical style={{ width: 8, height: 8 }} /> Lab Cert
+                <ShieldCheck style={{ width: 8, height: 8 }} /> QA Verified
               </span>
             </div>
           )}

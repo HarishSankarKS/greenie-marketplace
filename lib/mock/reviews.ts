@@ -35,7 +35,7 @@ export const reviews: Review[] = [
     gradeAccuracy: 5,
     deliveryPunctuality: 5,
     comment:
-      "Consistently reliable supply. WTN documentation was perfect and the lab certificate helped us satisfy our engineer's approval quickly. Reordering soon.",
+      "Consistently reliable supply. WTN documentation was perfect and the quality assurance report helped us satisfy our engineer's approval quickly. Reordering soon.",
     createdAt: "2026-03-02T14:00:00Z",
   },
   {
